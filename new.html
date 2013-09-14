@@ -5,25 +5,38 @@
   </head>
   <body>
     <div id='showList'></div>
-    <input type='text' id='listItem' placeholder='ITEM'>
+    <form id="sellForm">
+    <div id='itemContainer'>
+    
+    <input type='text' id='itemTitle' placeholder='TITLE' class="clearable">
+    <input type='text' id='itemImage' placeholder='IMAGE' value="http://zootool.com/images/no/page.large.png">
+    <input type='text' id='itemBy' placeholder='BY' class="clearable">
+    </div>
+    <input type='submit' value="SELL" id="sellButton">
+    </form>
+
     <script>
+
       var myDataRef = new Firebase('https://yghzkdqus8g.firebaseio-demo.com/');
-      $('#listItem').keypress(function (e) {
-        if (e.keyCode == 13) {
-          var itemName = $('#listItem').val();
-          myDataRef.push('Item :' + itemName);         
-          $('#listItem').val('');
-        }
-      });
+      var save=function() {
+          var itemTitle = $('#itemTitle').val();
+          var itemImage = $('#itemImage').val();
+          var itemBy = $('#itemBy').val();
+          var object={title:itemTitle, image:itemImage, by:itemBy, time:Date.now()};
+	 // console.log(object);
+	  myDataRef.push(object);  
+          $('#itemContainer input.clearable').val('');
+          return false;
+      };
+      $('#sellButton').click(save);
+      $("#sellForm").submit(save);
 
    myDataRef.on('child_added', function(snapshot) {
         var message = snapshot.val();
-        displayItem(message);
-console.log(message);
+       // displayItem(message);
+        //console.log(message);
       });
- myDataRef.on('value', function(value) {
-    console.log("new value ");//, value);
-      });
+   
       function displayItem(message) {
         $('#showList').after(message);
         
