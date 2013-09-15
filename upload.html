@@ -49,10 +49,27 @@
 	      <script>
 
 	         var ctr=0;
-		 var myDataRef = new Firebase('https://obhiyo.firebaseio.com/');
-   	         myDataRef.on('child_added', function(snapshot) 
- 		 {
- 		                var message = snapshot.val();
+		 var myDataRef = new Firebase('https://obhiyo.firebaseio.com/'); var save=function() {
+			  var itemTitle = $('#itemTitle').val();
+			  var itemCategory = $('#itemCategory').val();
+			  var itemDescription = $('#itemDescription').val();
+			  var itemPrice = $('#itemPrice').val();
+			  var itemImage = $('#productImage').val();
+			  var object={title : itemTitle, category : itemCategory, Description : itemDescription, Price: itemPrice, ImageUrl: itemImage, Time:Date.now()};
+			  console.log(object);
+			  myDataRef.push(object);  
+			  $('#itemContainer input.clearable').val('');
+			  return false;
+		      };
+		      $(document).ready(function(){
+			 $('#sellButton').click(save);
+			 $("#sellForm").submit(save);
+	                 $("#rightContainer").hide();
+	    		$('#file1').click(upload); 
+			});
+	   	         myDataRef.on('child_added', function(snapshot) 
+	 		 {
+	 		                var message = snapshot.val();
  		                //showNewAd(message);
 				if(message.title)
 				{
@@ -60,7 +77,7 @@
 
 				}
 			     	console.log(message);
-		  });
+		 	
 
 		
    	        
@@ -72,13 +89,33 @@
 
 		});
 };
-	         
+		var upload=function()
+		     {
+			filepicker.setKey("Acv5ch9yHQiegjHnXVH1Sz");
+			filepicker.pick(function(InkBlob)
+			    {
+				jQuery('#productImage').val(InkBlob.url);
+				var image = '<img width="50%" src="'+InkBlob.url+'" alt="pic">';
+				jQuery("#leftContainer").html(image);
+				window.top.location.href="./home.html";
+			        $("#rightContainer").show();
+ 				
+			    });
+       		      }; 
+		
+					 
+
 		var notLoggedIn=function(){
 		};
 	        var notRegistered=function(){
 		};
-	        var loggedIn=function(){
-		};
+	      function loggedIn() {
+		    console.log('Welcome!  Fetching your information.... ');
+		    FB.api('/me', function(response) {
+		      console.log('Good to see you, ' + response.name + '.');
+		      $('#itemBuy').val(response.name);
+		    });
+		  }
 
 	        </script>	
   </head>
@@ -106,7 +143,55 @@
 		</div>
 	  
 		 <div class="span8">
-		 <iframe src="uploadCopy.html" style="border:0px; width:100%; height:500px"></iframe>
+		
+			    <div class="row">
+			       <div>
+				     <div class="leftContainer">
+				    <div style="margin:10px">
+				    <div class="control-group">
+				      <input type='text' id='itemTitle' placeholder="Enter the Item Name" class="login-field" value="">
+				    </div>
+
+				    <div class="control-group">
+				      <input type='text' id='itemCategory' placeholder="Enter Item Category" value="" class="login-field">
+				    </div>
+
+ <div class="control-group">
+				      <input type='text' id='itemBy' placeholder="" value="" class="login-field" disabled>
+				    </div>
+
+				    <div class="control-group">
+				      <input type='text' id='itemDescription' placeholder="Enter Product Description" value="" class="login-field">
+				    </div>
+
+				    <div class="control-group">
+				      <input type='number' id='itemPrice' placeholder="Enter Price" value="" class="login-field">
+				    </div>
+				    
+			 	    <input type="hidden" id="productImage">
+
+
+				    </div> <!-- login-form -->
+				   </div> <!-- left container -->
+
+				   <div class="rightContainer">
+					<!--<input type='button' value="Click to upload Image" id="file1" class="btn btn-large btn-block btn-inverse">-->
+					<div class="imageContainer">
+					
+					</div>
+				  	<script>
+
+					</script>
+				
+					<!-- -->
+				    
+				   </div> <!-- rightContainer --> 
+
+				   <div class="footer">
+					<input type='button' value="Click to upload Image" id="file1" class="btn btn-large btn-block">
+				   <!--<a class="btn btn-primary btn-large btn-block" id="sellButton" href="#" style=""><h3>Submit</h3></a>-->
+				   </div> <!-- footer -->
+   </div>
 		</div>
 
 		
