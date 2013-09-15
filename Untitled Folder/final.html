@@ -2,12 +2,11 @@
 <html lang="en">
   <head>
         
-	<!--<link href='http://fonts.googleapis.com/css?family=Signika:400,600,700,300'	rel='stylesheet' type='text/css'>-->
-	<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Signika:400,600,700,300'	rel='stylesheet' type='text/css'>
 	<script src="js/utils.js"></script>
         <script src='https://cdn.firebase.com/v0/firebase.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
-         
+     
     
     <meta charset="utf-8">
     <title>Obhiyo.com</title>
@@ -29,26 +28,16 @@
   
     <style>
       body{background:#48c9b0;margin-top: 1em;
- 		/*font-family:Arial, signica;*/
-		font-family: 'Francois One' !important;
-		font-style: normal;
-		
-		
+ 		font-family:signica;
             }
-      #container{ text-align:center;}
-	h1{font-size:65px;font-weight: 400;}
      .item { width: 27%; border:1px solid grey; margin:10px; padding:10px;}
-     .item.w2 { width: 57%; height:95%;}
-      #header{ margin:100px; text-align:center;}
-      #tagline{ color:white; text-shadow:0px 2px gray;}
-      #tooltipContainer{ margin-left:27%;}
-
+     .item.w2 { width: 57%; hieght:95%;}
      </style>
 
 
 	      <script>
 
-	         var ctr=0;
+	         
 		 var myDataRef = new Firebase('https://obhiyo.firebaseio.com/');
    	         myDataRef.on('child_added', function(snapshot) 
  		 {
@@ -56,7 +45,7 @@
  		                //showNewAd(message);
 				if(message.title)
 				{
-			        	countItem(message);
+			        	displayItem(message);
 
 				}
 			     	console.log(message);
@@ -64,71 +53,35 @@
 
 		
    	        
-		var countItem=function(){
 
-		ctr++;
-		$("#counter").fadeIn(500, function(){
-		$("#counter").html(ctr+" Items for Sale");
+	          var displayItem=function(message)
+		  {
+			var item = makediv("item", message.title, $("#container") [0]);
+			$(item).append("<img src='"+message.ImageUrl+"'>");
+			$(item).append("<p><h4>Category: "+message.category+"<h4></p>");
+			$(item).append("<p><h5>Description: "+message.Description+"<h5></p>");
+                        refresh();
 
-		});
-};
-	         
-		var notLoggedIn=function(){
+		  };  
+		var refresh= function(){
+		      var container = document.querySelector('#container');
+		       var msnry = new Masonry( container, {
+		   	// options
+			   columnWidth: 100,
+			   itemSelector: '.item'
+			});
 		};
-	        var notRegistered=function(){
-		};
-	        var loggedIn=function(){
-		};
-
 	        </script>	
   </head>
   <body class="container" ng-app="masonryApp">
-	
    
-
-	<div class="row" id="header">
-	<h1 id="tagline">OBhiyo<small>Buy and Sell Socially</small></h1>
-	<div class="tooltip fade bottom in" id="tooltipContainer">
-		<div class="tooltip-arrow"></div>
-		<div id="counter" class="tooltip-inner" ></div>
+	<div class="row">
+	<div class="span9"><h1>OBhiyo</h1> </div>
+	<div class="span3"><a href="upfile1.html" class="btn btn-large btn-block btn-inverse">Post a new Ad</a></div>       
 	</div>
-    	
-	</div>
-
-	<div id="container" class="row container">
-	    <div class="span1"></div><!--/.span3-->
-
-		 <div class="span3">
-		  <div class="tile">
-		    <img src="images/obhiyo/fb-icon.png" alt="facebook"
-			class="tile-image big-illustration">
-		    <h3 class="tile-title">Discover</h3>
-		    <p></p>
-		  </div>
-		</div>
-
-	 <div class="span3">
-		  <div class="tile">
-		    <img src="images/icons/Pocket@2x.png" alt="Pocket"
-			class="tile-image big-illustration">
-		    <h3 class="tile-title">Transact</h3>
-		    <p></p>
-		    
-		  </div>
-		</div>
-
-
-	 <div class="span3">
-		  <div class="tile">
-		    <img src="images/icons/Calendar@2x.png" alt="Calendar@2x"
-			class="tile-image big-illustration">
-		    <h3 class="tile-title">Meetup</h3>
-		    <p></p>
-		    
-		  </div>
-		</div>
-
-		
+    
+	<div id="container">
+	
 	</div>
             
    
@@ -149,7 +102,5 @@
     <script src="js/jquery.placeholder.js"></script>
     <script src="js/jquery.stacktable.js"></script>
     <script src="js/application.js"></script>
-    <script src="js/fb.js"></script>
- 	
   </body>
 </html>	
