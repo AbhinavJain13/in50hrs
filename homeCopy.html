@@ -2,12 +2,11 @@
 <html lang="en">
   <head>
         
-	<!--<link href='http://fonts.googleapis.com/css?family=Signika:400,600,700,300'	rel='stylesheet' type='text/css'>-->
-	<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Signika:400,600,700,300'	rel='stylesheet' type='text/css'>
 	<script src="js/utils.js"></script>
         <script src='https://cdn.firebase.com/v0/firebase.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
-         
+     
     
     <meta charset="utf-8">
     <title>Obhiyo.com</title>
@@ -28,27 +27,17 @@
     <link href="http://netdna.bootstrapcdn.com/bootswatch/2.3.2/united/bootstrap.min.css" rel="stylesheet">
   
     <style>
-      body{background:#48c9b0;margin-top: 1em;
- 		/*font-family:Arial, signica;*/
-		font-family: 'Francois One' !important;
-		font-style: normal;
-		
-		
+   body{background:#48c9b0;margin:0px; padding:0px;
+ 		font-family:signica;
             }
-      #container{ text-align:center;}
-	h1{font-size:65px;font-weight: 400;}
      .item { width: 27%; border:1px solid grey; margin:10px; padding:10px;}
-     .item.w2 { width: 57%; height:95%;}
-      #header{ margin:100px; text-align:center;}
-      #tagline{ color:white; text-shadow:0px 2px gray;}
-      #tooltipContainer{ margin-left:27%;}
-
+     .item.w2 { width: 57%; hieght:95%;}
      </style>
 
 
 	      <script>
 
-	         var ctr=0;
+	         
 		 var myDataRef = new Firebase('https://obhiyo.firebaseio.com/');
    	         myDataRef.on('child_added', function(snapshot) 
  		 {
@@ -56,7 +45,6 @@
  		                //showNewAd(message);
 				if(message.title)
 				{
-			        	countItem(message);
 			        	displayItem(message);
 
 				}
@@ -70,12 +58,8 @@
 		  {
 			var item = makediv("item", message.title, $("#container") [0]);
 			$(item).append("<img src='"+message.ImageUrl+"'>");
-			
 			$(item).append("<p><h4>Category: "+message.category+"<h4></p>");
-			$(item).append("<p><h5>Description: "+message.Description+"<h5><iframe src=\"http://www.facebook.com/plugins/like.php?href="+encodeURIComponent("http://www.obhiyo.com/item/"+message.title)+"&amp;width=450&amp;height=80&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;send=true&amp;appId=515944375139426\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; width:450px; height:80px;\" allowTransparency=\"true\"></iframe></p>");
-			
-
-
+			$(item).append("<p><h5>Description: "+message.Description+"<h5></p>");
                         refresh();
 
 		  };  
@@ -87,49 +71,11 @@
 			   itemSelector: '.item'
 			});
 		};
-   	        
-		var countItem=function(){
-
-		ctr++;
-		$("#counter").fadeIn(500, function(){
-		$("#counter").html(ctr+" Items for Sale");
-
-		});
-};
-	         
-		var notLoggedIn=function(){
-		};
-	        var notRegistered=function(){
-		};
-	        var loggedIn=function(){
-		};
-
 	        </script>	
   </head>
   <body class="container" ng-app="masonryApp">
+   	<div id="container">
 	
-   
-
-	<div class="row" id="header">
-	<h1 id="tagline">OBhiyo<small>Buy and Sell Socially</small></h1>
-	<div class="tooltip fade bottom in" id="tooltipContainer">
-		<div class="tooltip-arrow"></div>
-		<div id="counter" class="tooltip-inner" ></div>
-	</div>
-    	
-	</div>
-
-	<div id="container" class="row container">
-	    	 <div class="item">
-		  <div class="tile">
-		     <img src="images/icons/Pocket@2x.png" alt="Pocket"
-			class="tile-image big-illustration">
-		    <h3 class="tile-title"><a href="./upload.html">Post an Ad</a></h3>
-		    <p></p>
-		  </div>
-		</div>
-	  
-		
 	</div>
             
    
@@ -150,7 +96,5 @@
     <script src="js/jquery.placeholder.js"></script>
     <script src="js/jquery.stacktable.js"></script>
     <script src="js/application.js"></script>
-    <script src="js/fb.js"></script>
- 	
   </body>
 </html>	
