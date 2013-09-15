@@ -1,28 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
+  <head>
+        
+
 	<script src="js/utils.js"></script>
         <script src='https://cdn.firebase.com/v0/firebase.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
-        <meta charset="utf-8">
-        <title>test</title>
         <link href="http://netdna.bootstrapcdn.com/bootswatch/2.3.2/united/bootstrap.min.css" rel="stylesheet">
         <style>
             body {
                 margin-top: 1em;
             }
-	   .item { width: 25%; border:1px solid grey; margin:10px; padding:10px;}
-	   .item.w2 { width: 50%; hieght: 	500px;}
+	   .item { width: 27%; border:1px solid grey; margin:10px; padding:10px;}
+	   .item.w2 { width: 57%; hieght:95%;}
         </style>
-    </head>
     
-    <body class="container" ng-app="masonryApp">
+    <meta charset="utf-8">
+    <title>Obhiyo.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      body{background:#48c9b0;}
+    </style>
+
+
+
+     
+
+
+  </head>
+ <body class="container" ng-app="masonryApp">
       
-        <div class="hero-unit">
-        
-            <!--<iframe
-            src="http://ghbtns.com/github-btn.html?user=passy&repo=angular-masonry&type=follow&size=large&count=true"
-            allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe> -->
+        <div class="hero-unit" style="background-color:black; color:white; font-size:16px;">
+	<h2>www.OBhiyo.com<h2>
+	<h4>The Social Marketplace</h4>  
         </div>
         <div class="row">
         </div>
@@ -30,8 +54,11 @@
         <div class="row" ng-controller="DemoCtrl">
            
         </div>
-	<div id="container">
-	  <div class="item">  <h1>Hello, world!</h1>
+	
+<div id="container">
+<div class="products"></div>
+	
+        <div class="item">  <h1>Hello, world!</h1>
 	        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces 				of content. Use it as a starting point to create something more unique.</p>
 	        <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 	  </div>
@@ -46,39 +73,48 @@
 	        <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
           </div>
 
+          <div class="item" style="background-color:black; color:white;">  <h1>Post a New Ad</h1>
+	        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces 				of content. Use it as a starting point to create something more unique.</p>
+	        <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+          </div>
+ 
 			
-	  <div class="item w2"><iframe src="chat.html" style="border:0px; height:400px; width:100%;" ></iframe></div>
+	  <div class="item w2"><iframe src="chat.html" style="border:0px; height:290px; width:100%;" ></iframe></div>  -->
 	
-	<!-- <input type='text' id='listItem' placeholder='ITEM'> -->
 	      <script>
-               var myDataRef = new Firebase('https://yghzkdqus8g.firebaseio-demo.com/');
-	       myDataRef.on('child_added', function(snapshot) {
-        var message = snapshot.val();
-	if(message.title)
-	{
-        	displayItem(message);
-	}
-        console.log(message);
-      });
 
+		function showNewAd(message)
+			{  
+		                 var html = "";
+			  	 html =+ "<div class='product'><b>"+message.title+"</b><br><small>"+ message.category +"</small><p>"+message.Description+"</p><b>"+message.Price+"</b><br><time>"+message.Time+"</time></div>";
+				 jQuery(".products").append(html);
+			 };
+	         
+		 var myDataRef = new Firebase('https://obhiyo.firebaseio.com/');
+   	         myDataRef.on('child_added', function(snapshot) 
+ 			{
+ 		                var message = snapshot.val();
+ 		                showNewAd(message);
+			});
 
-
-
-
-
-
-
+	/*	if(message.title)
+		{
+        		displayItem(message);
+		}
+     		console.log(message);
+   	        });
+s
 	        var displayItem=function(message){
 		makediv("item", message, $("#container") [0]);
-		};
+		};  */
 
 	     </script>	
 	</div>
      
 
 
-   <script src="http://passy.github.io/angular-masonry/bower_components/jquery/jquery.js"></script>
-       <!-- <script src="http://passy.github.io/angular-masonry/bower_components/jquery-bridget/jquery.bridget.js"></script>
+        <script src="http://passy.github.io/angular-masonry/bower_components/jquery/jquery.js"></script>
+        <script src="http://passy.github.io/angular-masonry/bower_components/jquery-bridget/jquery.bridget.js"></script>
         <script src="http://passy.github.io/angular-masonry/bower_components/get-style-property/get-style-property.js"></script>
         <script src="http://passy.github.io/angular-masonry/bower_components/get-size/get-size.js"></script>
         <script src="http://passy.github.io/angular-masonry/bower_components/eventEmitter/EventEmitter.js"></script>
@@ -89,7 +125,6 @@
         <script src="http://passy.github.io/angular-masonry/bower_components/outlayer/outlayer.js"></script>
         <script src="http://passy.github.io/angular-masonry/bower_components/masonry/masonry.js"></script>
         <script src="http://passy.github.io/angular-masonry/bower_components/imagesloaded/imagesloaded.js"></script>
-
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script src="http://passy.github.io/angular-masonry/angular-masonry.js"></script> -->
         <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
@@ -102,6 +137,23 @@
 	   itemSelector: '.item'
 	   });
         </script>
-    </body>
-</html>
+ 
+    
 
+
+ 
+    <script type="text/javascript" src="http://api.filepicker.io/v1/filepicker.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src="js/jquery.stacktable.js"></script>
+    <script src="js/application.js"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>FilePicker</title>
+        
+	   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+
+</head>
+      
+
+<body>
+       <script type="text/javascript" src="http://api.filepicker.io/v1/filepicker.js"></script>
+	<div class="container">
+	<input type='button' value="File 1" id="file1">
+  	<script>
+        var upload=function(){
+		filepicker.setKey("Acv5ch9yHQiegjHnXVH1Sz");
+		filepicker.pick(function(InkBlob){
+		  console.log(InkBlob.url);
+		});
+        }; 
+        $('#file1').click(upload); 	
+	</script>
+      </div>
+</body>
+
+</html>

@@ -3606,7 +3606,7 @@ body.vjs-full-window {
 .login-form {
   background-color: #edeff1;
   padding: 24px 23px 20px;
-  position: relative;
+//  position: relative;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -3865,4 +3865,46 @@ body.vjs-full-window {
 .mhl,
 .mal {
   margin-left: 20px;
+}
+
+.leftContainer {
+ float:left;
+ width:40%;
+ position:relative;
+
+}
+
+.rightContainer {
+ position:relative;
+ float:right;
+ width:52%;
+ margin	:10px 0px 10px 10px ;
+  background-color: #edeff1;
+  padding: 15px;
+ position: relative;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+
+}
+
+.footer{
+ position: relative;
+ margin-top: 40px;
+ background-color: #edeff1;
+ padding: 10px 10px 10px 10px;
+ clear:both; 
+  border-radius: 6px;
+}
+
+.topContainer{
+ position:relative;
+ background-color: #34495E;
+ padding:30px;
+ margin:20px 0px 10px 0px;
+ border-radius:6px;
+ color:white;
+ text-align:center;
+
 }
