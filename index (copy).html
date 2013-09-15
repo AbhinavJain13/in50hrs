@@ -42,7 +42,7 @@
       #header{ margin:100px; text-align:center;}
       #tagline{ color:white; text-shadow:0px 2px gray;}
       #tooltipContainer{ margin-left:27%;}
-
+      #fbbutton{text-align:left;}
      </style>
 
 
@@ -57,36 +57,12 @@
 				if(message.title)
 				{
 			        	countItem(message);
-			        	displayItem(message);
 
 				}
 			     	console.log(message);
 		  });
 
 		
-   	        
-
-	          var displayItem=function(message)
-		  {
-			var item = makediv("item", message.title, $("#container") [0]);
-			$(item).append("<img src='"+message.ImageUrl+"'>");
-			
-			$(item).append("<p><h4>Category: "+message.category+"<h4></p>");
-			$(item).append("<p><h5>Description: "+message.Description+"<h5><iframe src=\"http://www.facebook.com/plugins/like.php?href="+encodeURIComponent("http://www.obhiyo.com/item/"+message.title)+"&amp;width=450&amp;height=80&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;send=true&amp;appId=515944375139426\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; width:450px; height:80px;\" allowTransparency=\"true\"></iframe></p>");
-			
-
-
-                        refresh();
-
-		  };  
-		var refresh= function(){
-		      var container = document.querySelector('#container');
-		       var msnry = new Masonry( container, {
-		   	// options
-			   columnWidth: 100,
-			   itemSelector: '.item'
-			});
-		};
    	        
 		var countItem=function(){
 
@@ -98,11 +74,20 @@
 };
 	         
 		var notLoggedIn=function(){
+		 $('#fbbutton').show();
 		};
 	        var notRegistered=function(){
+		 $('#fbtext').val("Signup");
+ 		 $('#fbbutton').show();
 		};
-	        var loggedIn=function(){
+	        var loggedIn=function(){ console.log("logggedin");
+		  $('#fbtext').val("hello, "+response.name+"");
+		  $('#fbbutton').hide();
+		  
 		};
+		FB.api('/me', function(response) {
+  console.log('Your name is ' + response.name);
+});
 
 	        </script>	
   </head>
@@ -120,15 +105,40 @@
 	</div>
 
 	<div id="container" class="row container">
-	    	 <div class="item">
+	    <div class="span1"></div><!--/.span3-->
+
+		 <div class="span3">
 		  <div class="tile">
-		     <img src="images/icons/Pocket@2x.png" alt="Pocket"
+		    <img src="images/obhiyo/fb-icon.png" alt="facebook"
 			class="tile-image big-illustration">
-		    <h3 class="tile-title"><a href="./upfile2.html">Post an Ad</a></h3>
-		    <p></p>
+		    <h3 class="tile-title" id="fbtext">Login</h3>
+			<div id="fb-root">
+		    <p id="fbbutton"><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></p>
+			</div>
 		  </div>
 		</div>
-	  
+
+	 <div class="span3">
+		  <div class="tile">
+		    <img src="images/icons/Pocket@2x.png" alt="Pocket"
+			class="tile-image big-illustration">
+		    <h3 class="tile-title">Transact</h3>
+		    <p></p>
+		    
+		  </div>
+		</div>
+
+
+	 <div class="span3">
+		  <div class="tile">
+		    <img src="images/icons/Calendar@2x.png" alt="Calendar@2x"
+			class="tile-image big-illustration">
+		    <h3 class="tile-title">Meetup</h3>
+		    <p></p>
+		    
+		  </div>
+		</div>
+
 		
 	</div>
             
