@@ -64,7 +64,7 @@
 		      $(document).ready(function(){
 			 $('#sellButton').click(save);
 			 $("#sellForm").submit(save);
-	                 $("#rightContainer").hide();
+	                 $(".rightContainer").hide();
 	    		$('#file1').click(upload); 
 			});
 	   	         myDataRef.on('child_added', function(snapshot) 
@@ -77,28 +77,24 @@
 
 				}
 			     	console.log(message);
-		 	
-
-		
-   	        
+		         });	   	        
 		var countItem=function(){
-
-		ctr++;
-		$("#counter").fadeIn(500, function(){
-		$("#counter").html(ctr+" Items for Sale");
-
-		});
-};
+			ctr++;
+			$("#counter").fadeIn(500, function(){
+				$("#counter").html(ctr+" Items for Sale");
+			});			
+		};
 		var upload=function()
 		     {
+			console.log("upload called");
 			filepicker.setKey("Acv5ch9yHQiegjHnXVH1Sz");
 			filepicker.pick(function(InkBlob)
 			    {
 				jQuery('#productImage').val(InkBlob.url);
 				var image = '<img width="50%" src="'+InkBlob.url+'" alt="pic">';
 				jQuery("#leftContainer").html(image);
-				window.top.location.href="./home.html";
-			        $("#rightContainer").show();
+				//window.top.location.href="./home.html";
+			        $(".rightContainer").show();
  				
 			    });
        		      }; 
@@ -116,7 +112,16 @@
 		      $('#itemBuy').val(response.name);
 		    });
 		  }
-
+ /*FB.login(function(response) {
+   if (response.authResponse) {
+     console.log('Welcome!  Fetching your information.... ');
+     FB.api('/me', function(response) {
+       console.log('Good to see you, ' + response.name + '.');
+     });
+   } else {
+     console.log('User cancelled login or did not fully authorize.');
+   }
+ });*/	
 	        </script>	
   </head>
   <body class="container" ng-app="masonryApp">
@@ -124,10 +129,10 @@
    
 
 	<div class="row" id="header">
-	<h1 id="tagline">OBhiyo<small>Buy and Sell Socially</small></h1>
+	<h1 id="tagline"><a href="./" >OBhiyo</a><small>Buy and Sell Socially</small></h1>
 	<div class="tooltip fade bottom in" id="tooltipContainer">
 		<div class="tooltip-arrow"></div>
-		<div id="counter" class="tooltip-inner" ></div>
+		<div class="tooltip-inner" ><a href="./home.html" id="counter" ></a></div>
 	</div>
     	
 	</div>
@@ -135,9 +140,9 @@
 	<div id="container" class="row container">
 	    	 <div class="span2">
 		  <div class="tile">
-		    <img src="images/obhiyo/.png" alt="facebook"
+		    <img src="images/icons/Pocket@2x.png" alt="facebook"
 			class="tile-image big-illustration">
-		    <h3 class="tile-title"></h3>
+		    <h3 class="tile-title">Transact</h3>
 		    <p></p>
 		  </div>
 		</div>
